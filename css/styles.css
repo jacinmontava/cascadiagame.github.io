@@ -2365,6 +2365,12 @@ top: 290px;
 		max-width: 5.05vw;
 	}
 
+	.tokenContainer .redCross {
+		top: -1.5vw;
+		right: -1.5vw;
+		width: 4vw;
+	}
+
 	.tokenTileContainer[tokentilenum="0"] {
 		top: 0vw;
 	}

@@ -311,7 +311,7 @@ $(document).on(touchEvent,'#hideWildlifeGoals',function(){
 	$('#gameLayer #goalLayerListContainer').hide();
 });
 
-$(document).on(touchEvent,'.modal.is-active .modal-background',function(){
+$(document).on(touchEvent,'.modal.is-active .modal-background.closableModalBackground',function(){
 	$('.modal.is-active').removeClass('is-active');
 });
 

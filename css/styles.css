@@ -1689,6 +1689,11 @@ top: 290px;
     top: 62px;
 }
 
+#scoringTable-finalScoringContainer #habitatBonusScoringTable {
+	left: 301px;
+    top: 62px;
+}
+
 #allEndGameScoringCategories {
 	display:none;
 	margin-top: 0px;
@@ -1821,7 +1826,10 @@ top: 290px;
 	font-family: 'Architects Daughter', cursive;
 }
 
-#habitatScoringTable.finalScoringTable input, #habitatScoringTable.finalScoringTable input:focus {
+#habitatScoringTable.finalScoringTable input,
+#habitatScoringTable.finalScoringTable input:focus,
+#habitatBonusScoringTable.finalScoringTable input,
+#habitatBonusScoringTable.finalScoringTable input:focus {
 	background-color: #32dc684f;
     display: inline;
     box-sizing: border-box;
@@ -1831,8 +1839,14 @@ top: 290px;
 	color: #5e3a10;
 }
 
-#habitatScoringTable.finalScoringTable input, #habitatScoringTable.finalScoringTable input:focus, #scoringTable-finalScoringContainer #habitatScoringTable.finalScoringTable .scoreCell .scoreCellText,
-#scoringTable-finalScoringContainer #habitatScoringTable.finalScoringTable .subtotalCell .subtotalText {
+#habitatScoringTable.finalScoringTable input,
+#habitatScoringTable.finalScoringTable input:focus,
+#habitatScoringTable.finalScoringTable .scoreCell .scoreCellText,
+#habitatScoringTable.finalScoringTable .subtotalCell .subtotalText,
+#habitatBonusScoringTable.finalScoringTable input,
+#habitatBonusScoringTable.finalScoringTable input:focus,
+#habitatBonusScoringTable.finalScoringTable .scoreCell .scoreCellText,
+#habitatBonusScoringTable.finalScoringTable .subtotalCell .subtotalText {
 	width: 66px;
     height: 59.4px;
     margin: 1.1px 3px -0.5px 1px;
@@ -3405,7 +3419,19 @@ top: 290px;
 		top: 5vw;
 	}
 
-	#habitatScoringTable.finalScoringTable input, #habitatScoringTable.finalScoringTable input:focus, #scoringTable-finalScoringContainer #habitatScoringTable.finalScoringTable .scoreCell .scoreCellText, #scoringTable-finalScoringContainer #habitatScoringTable.finalScoringTable .subtotalCell .subtotalText {
+	#scoringTable-finalScoringContainer #habitatBonusScoringTable {
+		left: 24vw;
+		top: 5vw;
+	}
+
+	#habitatScoringTable.finalScoringTable input,
+	#habitatScoringTable.finalScoringTable input:focus,
+	#habitatScoringTable.finalScoringTable .scoreCell .scoreCellText,
+	#habitatScoringTable.finalScoringTable .subtotalCell .subtotalText,
+	#habitatBonusScoringTable.finalScoringTable input,
+	#habitatBonusScoringTable.finalScoringTable input:focus,
+	#habitatBonusScoringTable.finalScoringTable .scoreCell .scoreCellText,
+	#habitatBonusScoringTable.finalScoringTable .subtotalCell .subtotalText {
 		font-size: 2.3vw;
 		margin: 0vw auto -0.3vw;
 		width: 5.5vw;

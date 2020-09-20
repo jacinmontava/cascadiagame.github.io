@@ -3029,52 +3029,76 @@ function endOfGameSetup() {
 							<td class="scoreCell">
 								<p class="scoreCellText scoringInput dataFromText" id="mountain-habitatScoringInput" category="habitat-Cell"></p>
 							</td>
-							<td class="scoreCell">
-								<p class="scoreCellText scoringInput dataFromText" id="mountainBonus-habitatScoringInput" category="habitatBonus-Cell"></p>
-							</td>
 						</tr>
 						<tr>		
 							<td class="scoreCell">
 								<p class="scoreCellText scoringInput dataFromText" id="forest-habitatScoringInput" category="habitat-Cell"></p>
-							</td>
-							<td class="scoreCell">
-								<p class="scoreCellText scoringInput dataFromText" id="forestBonus-habitatScoringInput" category="habitatBonus-Cell"></p>
 							</td>
 						</tr>
 						<tr>		
 							<td class="scoreCell">
 								<p class="scoreCellText scoringInput dataFromText" id="desert-habitatScoringInput" category="habitat-Cell"></p>
 							</td>
-							<td class="scoreCell">
-								<p class="scoreCellText scoringInput dataFromText" id="desertBonus-habitatScoringInput" category="habitatBonus-Cell"></p>
-							</td>
 						</tr>
 						<tr>		
 							<td class="scoreCell">
 								<p class="scoreCellText scoringInput dataFromText" id="swamp-habitatScoringInput" category="habitat-Cell"></p>
-							</td>
-							<td class="scoreCell">
-								<p class="scoreCellText scoringInput dataFromText" id="swampBonus-habitatScoringInput" category="habitatBonus-Cell"></p>
 							</td>
 						</tr>
 						<tr>		
 							<td class="scoreCell">
 								<p class="scoreCellText scoringInput dataFromText" id="lake-habitatScoringInput" category="habitat-Cell"></p>
 							</td>
+						</tr>
+						<tr>		
+							<td class="subtotalCell">
+								<p class="subtotalText" id="habitat-Subtotal"></p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+				<table id="habitatBonusScoringTable" cellpadding="0" cellspacing="0" class="finalScoringTable">
+					<tbody>
+						<tr>		
+							<td class="scoreCell">
+								<p class="scoreCellText scoringInput dataFromText" id="mountainBonus-habitatScoringInput" category="habitatBonus-Cell"></p>
+							</td>
+						</tr>
+						<tr>		
+							<td class="scoreCell">
+								<p class="scoreCellText scoringInput dataFromText" id="forestBonus-habitatScoringInput" category="habitatBonus-Cell"></p>
+							</td>
+						</tr>
+						<tr>		
+							<td class="scoreCell">
+								<p class="scoreCellText scoringInput dataFromText" id="desertBonus-habitatScoringInput" category="habitatBonus-Cell"></p>
+							</td>
+						</tr>
+						<tr>		
+							<td class="scoreCell">
+								<p class="scoreCellText scoringInput dataFromText" id="swampBonus-habitatScoringInput" category="habitatBonus-Cell"></p>
+							</td>
+						</tr>
+						<tr>		
 							<td class="scoreCell">
 								<p class="scoreCellText scoringInput dataFromText" id="lakeBonus-habitatScoringInput" category="habitatBonus-Cell"></p>
 							</td>
 						</tr>
 						<tr>		
 							<td class="subtotalCell">
-								<p class="subtotalText" id="habitat-Subtotal"></p>
-							</td>
-							<td class="subtotalCell">
 								<p class="subtotalText" id="habitatBonus-Subtotal"></p>
 							</td>
 						</tr>
 					</tbody>
 				</table>
+
+
+
+
+
+
 				<p id="finalScore">Final score: <span class="has-text-weight-bold"><span id="scoreVal">0</span> points</span></p>
 			</div>
 
@@ -3282,7 +3306,7 @@ $(document).on(touchEvent,'.finalScoringTable .scoreCell .scoringInput',function
 
 function updateAllSubtotals() {
 
-	let tables = ['wildlifeScoringTable', 'habitatScoringTable', 'habitatScoringTable'];
+	let tables = ['wildlifeScoringTable', 'habitatScoringTable', 'habitatBonusScoringTable'];
 	let categories = ['wildlife', 'habitat', 'habitatBonus'];
 	let fullCategoryName = ['wildlife-Cell', 'habitat-Cell', 'habitatBonus-Cell'];
 
@@ -3731,9 +3755,9 @@ function calculateHabitatScoring() {
 		let largestGroupNum = habitatMatches[currentHabitat].largestSet;
 		$('#habitatScoringTable.finalScoringTable .scoreCell #' + currentHabitat + '-habitatScoringInput').html(largestGroupNum);
 		if(largestGroupNum > 6) {
-			$('#habitatScoringTable.finalScoringTable .scoreCell #' + currentHabitat + 'Bonus-habitatScoringInput').html('+2');
+			$('#habitatBonusScoringTable.finalScoringTable .scoreCell #' + currentHabitat + 'Bonus-habitatScoringInput').html('+2');
 		} else {
-			$('#habitatScoringTable.finalScoringTable .scoreCell #' + currentHabitat + 'Bonus-habitatScoringInput').html('-');
+			$('#habitatBonusScoringTable.finalScoringTable .scoreCell #' + currentHabitat + 'Bonus-habitatScoringInput').html('-');
 		}
 	}
 }

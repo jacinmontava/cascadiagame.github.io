@@ -1626,7 +1626,7 @@ function undoTilePlacementFunction() {
 		
 		
 		// Again the code checks to see if another token has previously been chosen - if it has the below code is actioned in order to remove the appropraite elements and classes
-		if($('.tokenTileContainer.potentialNatureCube.natureCubeToken .tokenContainer. activeToken').length) {
+		if($('.tokenTileContainer.potentialNatureCube.natureCubeToken .tokenContainer .activeToken').length) {
 			// Create the standard default token image and insert it into the current chosen token container
 			$('.tokenTileContainer.chosenNatureCubeTokenParent .tokenContainer').append('<img class="token" src="img/tokens/' + currentChosenWildlife + '.png">');
 

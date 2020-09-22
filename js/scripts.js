@@ -3649,12 +3649,14 @@ function generateAllElkLines(){
 						
 			if(checkedIndexCombos.indexOf(thisIndexCombo) == -1 && checkedIndexCombos.indexOf(altIndexCombo) == -1 && i != j) {				
 								
-				allDuplicateLineIndexes.push(i, j);
 				checkedIndexCombos.push(thisIndexCombo);
 				let sharedElkTokenDetected = false;
 				sharedElkTokenDetected = potentialElkLines[i].some(r=> potentialElkLines[j].indexOf(r) >= 0);
 				
 				if(sharedElkTokenDetected)  {
+
+					allDuplicateLineIndexes.push(i, j);
+
 					let thisSharedTile = returnDuplicates(potentialElkLines[i], potentialElkLines[j]);
 
 					if(!sharedElkTokenIDs.hasOwnProperty(thisSharedTile)) {
@@ -3678,112 +3680,121 @@ function generateAllElkLines(){
 		}
 	}
 
-	let uniqueDuplicateLineIndexes = allDuplicateLineIndexes.filter(onlyUnique);
-
-	if(uniqueDuplicateLineIndexes.length != potentialElkLines.length) {
-		uniqueDuplicateLineIndexes.sort((a, b) => a - b);
-
-		for (let i = 0; i < potentialElkLines.length; i++) {
-			if(uniqueDuplicateLineIndexes.indexOf(i) == -1) {
-				processStandaloneElkLine(potentialElkLines[i]);
-			}
-		}
-	}
-
-	let sharedTilesLinesCombo = []
-	const allSharedTiles = Object.keys(sharedElkTokenIDs);
-
-	for (const sharedTile of allSharedTiles) {
-		let currentArray = [];
-		for (let i = 0; i < sharedElkTokenIDs[sharedTile].includedLines.length; i++) {
-						
-			let sharedElkTokenIDsClone = sharedElkTokenIDs[sharedTile].includedLines.slice();
-			sharedElkTokenIDsClone.splice(i,1);
-						
-			let matchedLinesConvertedToText = '';
-			for (let j = 0; j < sharedElkTokenIDsClone.length; j++) {
-				matchedLinesConvertedToText += sharedElkTokenIDsClone[j];
-				if((j + 1) != sharedElkTokenIDsClone.length) {
-					matchedLinesConvertedToText += '-';
-				}
-			}
-			currentArray.push(`${matchedLinesConvertedToText}_${sharedTile}`);
-		}
-		sharedTilesLinesCombo.push(currentArray);
-	}
-		
-	let allTileCombinations = allPossibleCases(sharedTilesLinesCombo);		
-
-	let allPotentialLineCombinations = [];
-	let allPotentialLineCombinationsScores = [];
-
-	for (let i = 0; i < allTileCombinations.length; i++) {
-		let copyOfLines = JSON.parse(JSON.stringify(allLineDetails));
-		let thisTileCombination = allTileCombinations[i].split(' ');
-		let currentLineCombination = [];
-
-		for (let j = 0; j < thisTileCombination.length; j++) {
-						
-			let splitTileCombination = thisTileCombination[j].split('_');
-			let linesToBeExcludedUnsplit = splitTileCombination[0].toString();
-			let linesToBeExcluded = linesToBeExcludedUnsplit.split('-');
-			let tileToRemove = splitTileCombination[1].toString();
-			
-			for (let k = 0; k < linesToBeExcluded.length; k++) {
-				let thisLine = linesToBeExcluded[k].toString();
-				let tileIndex = copyOfLines[thisLine].indexOf(tileToRemove);
-							
-				copyOfLines[thisLine][tileIndex] = 'undefined';
-			}
-		}
-
-		let currentLineVariations = [];
-		const allLines = Object.keys(copyOfLines);
-		
-		for (const thisLine of allLines) {
 	
-			let currentLineGroup = [];
-			currentLineGroup[0] = [];
 
-			for (let k = 0, l = 0; k < copyOfLines[thisLine].length; k++) {
-				if(copyOfLines[thisLine][k] != 'undefined') {
-					if(currentLineGroup[l].length == 4) {
-						l++;
-						currentLineGroup[l] = [];
-					}
-					currentLineGroup[l].push(copyOfLines[thisLine][k]);
-				} else {
-					if(currentLineGroup[l].length > 0) {
-						l++;
-						currentLineGroup[l] = [];
-					}
+	if(allDuplicateLineIndexes.length == 0) {
+		for (let i = 0; i < potentialElkLines.length; i++) {
+			processStandaloneElkLine(potentialElkLines[i]);
+		}
+	} else {
+		let uniqueDuplicateLineIndexes = allDuplicateLineIndexes.filter(onlyUnique);
+
+		if(uniqueDuplicateLineIndexes.length != potentialElkLines.length) {
+			uniqueDuplicateLineIndexes.sort((a, b) => a - b);
+	
+			for (let i = 0; i < potentialElkLines.length; i++) {
+				if(uniqueDuplicateLineIndexes.indexOf(i) == -1) {
+					processStandaloneElkLine(potentialElkLines[i]);
 				}
 			}
-
-			if(currentLineGroup.length != 0) {
-				for (let l = currentLineGroup.length - 1; l >= 0; l--) {
-					if(currentLineGroup[l].length == 0) {
-						currentLineGroup.splice(l,1);
+		}
+	
+		let sharedTilesLinesCombo = []
+		const allSharedTiles = Object.keys(sharedElkTokenIDs);
+	
+		for (const sharedTile of allSharedTiles) {
+			let currentArray = [];
+			for (let i = 0; i < sharedElkTokenIDs[sharedTile].includedLines.length; i++) {
+							
+				let sharedElkTokenIDsClone = sharedElkTokenIDs[sharedTile].includedLines.slice();
+				sharedElkTokenIDsClone.splice(i,1);
+							
+				let matchedLinesConvertedToText = '';
+				for (let j = 0; j < sharedElkTokenIDsClone.length; j++) {
+					matchedLinesConvertedToText += sharedElkTokenIDsClone[j];
+					if((j + 1) != sharedElkTokenIDsClone.length) {
+						matchedLinesConvertedToText += '-';
 					}
-				}			
-									
-				currentLineVariations.push(...currentLineGroup);
+				}
+				currentArray.push(`${matchedLinesConvertedToText}_${sharedTile}`);
 			}
+			sharedTilesLinesCombo.push(currentArray);
 		}
+			
+		let allTileCombinations = allPossibleCases(sharedTilesLinesCombo);		
+	
+		let allPotentialLineCombinations = [];
+		let allPotentialLineCombinationsScores = [];
+	
+		for (let i = 0; i < allTileCombinations.length; i++) {
+			let copyOfLines = JSON.parse(JSON.stringify(allLineDetails));
+			let thisTileCombination = allTileCombinations[i].split(' ');
+			let currentLineCombination = [];
+	
+			for (let j = 0; j < thisTileCombination.length; j++) {
+							
+				let splitTileCombination = thisTileCombination[j].split('_');
+				let linesToBeExcludedUnsplit = splitTileCombination[0].toString();
+				let linesToBeExcluded = linesToBeExcludedUnsplit.split('-');
+				let tileToRemove = splitTileCombination[1].toString();
+				
+				for (let k = 0; k < linesToBeExcluded.length; k++) {
+					let thisLine = linesToBeExcluded[k].toString();
+					let tileIndex = copyOfLines[thisLine].indexOf(tileToRemove);
+								
+					copyOfLines[thisLine][tileIndex] = 'undefined';
+				}
+			}
+	
+			let currentLineVariations = [];
+			const allLines = Object.keys(copyOfLines);
+			
+			for (const thisLine of allLines) {
+		
+				let currentLineGroup = [];
+				currentLineGroup[0] = [];
+	
+				for (let k = 0, l = 0; k < copyOfLines[thisLine].length; k++) {
+					if(copyOfLines[thisLine][k] != 'undefined') {
+						if(currentLineGroup[l].length == 4) {
+							l++;
+							currentLineGroup[l] = [];
+						}
+						currentLineGroup[l].push(copyOfLines[thisLine][k]);
+					} else {
+						if(currentLineGroup[l].length > 0) {
+							l++;
+							currentLineGroup[l] = [];
+						}
+					}
+				}
+	
+				if(currentLineGroup.length != 0) {
+					for (let l = currentLineGroup.length - 1; l >= 0; l--) {
+						if(currentLineGroup[l].length == 0) {
+							currentLineGroup.splice(l,1);
+						}
+					}			
+										
+					currentLineVariations.push(...currentLineGroup);
+				}
+			}
+	
+			let currentLineVariationScore = 0;
+	
+			for (let m = 0; m < currentLineVariations.length; m++) {
+				currentLineVariationScore += elkScoringValues[currentLineVariations[m].length];
+			}
+	
+			allPotentialLineCombinations.push(currentLineVariations);
+			allPotentialLineCombinationsScores.push(currentLineVariationScore);
+	
+		} 
+	
+		let highestScoreIndex = indexOfMax(allPotentialLineCombinationsScores);
+		confirmedElkLines.push(...allPotentialLineCombinations[highestScoreIndex]);
 
-		let currentLineVariationScore = 0;
-
-		for (let m = 0; m < currentLineVariations.length; m++) {
-			currentLineVariationScore += elkScoringValues[currentLineVariations[m].length];
-		}
-
-		allPotentialLineCombinations.push(currentLineVariations);
-		allPotentialLineCombinationsScores.push(currentLineVariationScore);
-
-	} 
-
-	let highestScoreIndex = indexOfMax(allPotentialLineCombinationsScores);
-	confirmedElkLines.push(...allPotentialLineCombinations[highestScoreIndex]);
+	}
 }
 
 function processStandaloneElkLine(thisElkLine) {

@@ -3471,6 +3471,12 @@ top: 290px;
 		margin-bottom: 2vw;
 	}
 
+	.mapTileContainer.placedTile .debugTileCoords {
+		top: 0vw;
+		left: 0vw;
+		font-size: 2.6vw;
+	}
+
 }
 
 

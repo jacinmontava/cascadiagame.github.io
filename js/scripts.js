@@ -3585,7 +3585,8 @@ function calculateElkTokenScoring() {
 			return b.length - a.length;
 		});
 
-		for (let i = 0; i < confirmedElkLines.length; i++) {			
+		for (let i = 0; i < confirmedElkLines.length; i++) {		
+			
 			let elkInLineNum = confirmedElkLines[i].length;
 			tokenScoring.elk.totalScore += elkScoringValues[elkInLineNum];
 		}
@@ -3594,7 +3595,6 @@ function calculateElkTokenScoring() {
 
 let sharedElkTokenIDs = {};
 let allLineDetails = {};
-let allLineCombinations = [];
 
 function generateAllElkLines(){
 
@@ -3639,7 +3639,7 @@ function generateAllElkLines(){
 	// Now check to see if the potential lines have any shared neighbours or not
 
 	let checkedIndexCombos = [];
-	let allDuplicateLineIndexes = [];
+	let allSharedElkTokenLineNums = [];
 
 	for (let i = potentialElkLines.length - 1; i >= 0; i--) {
 		allLineDetails['line' + (i + 1)] = [...potentialElkLines[i]];
@@ -3655,7 +3655,10 @@ function generateAllElkLines(){
 				
 				if(sharedElkTokenDetected)  {
 
-					allDuplicateLineIndexes.push(i, j);
+					let matchedLineOne = `line${i + 1}`;
+					let matchedLineTwo = `line${j + 1}`;
+
+					allSharedElkTokenLineNums.push(matchedLineOne, matchedLineTwo);
 
 					let thisSharedTile = returnDuplicates(potentialElkLines[i], potentialElkLines[j]);
 
@@ -3665,9 +3668,6 @@ function generateAllElkLines(){
 						}
 					}
 
-					let matchedLineOne = 'line' + (i + 1);
-					let matchedLineTwo = 'line' + (j + 1);
-										
 					if(sharedElkTokenIDs[thisSharedTile].includedLines.indexOf(matchedLineOne) === -1) {						
 						sharedElkTokenIDs[thisSharedTile].includedLines.push(matchedLineOne);
 					}
@@ -3680,25 +3680,27 @@ function generateAllElkLines(){
 		}
 	}
 
-	
+	// let allSharedElkTokenLineNums = [];
 
-	if(allDuplicateLineIndexes.length == 0) {
+	let sharedElkTokenLineNums = allSharedElkTokenLineNums.filter(onlyUnique);
+	if(sharedElkTokenLineNums.length == 0) {
 		for (let i = 0; i < potentialElkLines.length; i++) {
 			processStandaloneElkLine(potentialElkLines[i]);
 		}
 	} else {
-		let uniqueDuplicateLineIndexes = allDuplicateLineIndexes.filter(onlyUnique);
 
-		if(uniqueDuplicateLineIndexes.length != potentialElkLines.length) {
-			uniqueDuplicateLineIndexes.sort((a, b) => a - b);
-	
-			for (let i = 0; i < potentialElkLines.length; i++) {
-				if(uniqueDuplicateLineIndexes.indexOf(i) == -1) {
-					processStandaloneElkLine(potentialElkLines[i]);
+		if(sharedElkTokenLineNums.length != potentialElkLines.length) {
+			sharedElkTokenLineNums.sort((a, b) => a - b);
+			let sharedTilesLinesCombo = []
+			const allLinesNum = Object.keys(allLineDetails);
+			for (const thisLineNum of allLinesNum) {
+				if(sharedElkTokenLineNums.indexOf(thisLineNum) == -1) {
+					processStandaloneElkLine(allLineDetails[thisLineNum]);
+					delete allLineDetails[thisLineNum];
 				}
 			}
 		}
-	
+
 		let sharedTilesLinesCombo = []
 		const allSharedTiles = Object.keys(sharedElkTokenIDs);
 	

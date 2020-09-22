@@ -225,9 +225,7 @@ function processMapMovement(thisDirection){
 	setTimeout(function(){
 		$('.activeArrow').removeClass('activeArrow');
 	}, 100);
-
 }
-
 
 function checkIfMapLimitReached(direction, newIncrementPosition){
 
@@ -323,7 +321,6 @@ $(document).on(touchEvent,'#gameInstructionsButton',function(){
 	openInNewTab(rulesURL);
 });
 
-
 $(document).on(touchEvent,'#mobileGameInstructionsButton',function(){
 	openInNewTab(rulesURL);
 });
@@ -347,7 +344,6 @@ $(document).on(touchEvent,'#goalsContainer .goalScoringThumbnailContainer',funct
 });
 
 $(document).on(touchEvent,'#useNatureCube:not([disabled])',function(){
-
 	// in case the player has already clicked a tile+token container to start the vanilla tile placement process - undo all of the active states before processing wwith the naturew cube process.
 	deactivateChosenTile();
 
@@ -367,10 +363,6 @@ $(document).on(touchEvent,'#confirmReplacingFourDuplicates',function(){
 $(document).on(touchEvent,'.closeModalTrigger',function(){
 	$('.modal.is-active').removeClass('is-active');
 });
-
-// $(document).on(touchEvent,'#randomizeGoals',function(){
-// 	setupScoringGoals(scoringGoalMode);
-// });
 
 $(document).on(touchEvent,'#startGame',function(){
 	$('#keyboardKeysModal').addClass('is-active');
@@ -392,7 +384,6 @@ $(document).on(touchEvent,'#goalTilesContainer #goalList .goalScoring',function(
 	var thisWildlife = targID.split('-');
 	$('#' + thisWildlife[0] + 'ScoringModal').addClass('is-active');
 });
-
 
 $(document).on(touchEvent,'#mapContainer #zoomOptions .zoomOption.activeZoom',function(){
 
@@ -446,7 +437,6 @@ $(document).on(touchEvent,'#mapContainer #zoomOptions .zoomOption.activeZoom',fu
 		setZoom(zoomLevel,document.getElementById("mapHiddenOverlay"));
 
 	}
-
 });
 
 function setZoom(newZoom,el) {
@@ -556,9 +546,7 @@ $(document).on(touchEvent,'.mapTileContainer.potentialPlacement .tileContainer',
 		$('.tileContainer.mapPreviewTileContainer').remove();
 		// adding the showOptions class to the #placedTileOptions element causes it to slideUp for the user to view the options, such as rotating the tile, confirming the placement, or cancelling the placement
 		$('#mapContainer #placedTileOptions').addClass('showOptions');
-
 		rotateTileAllowed = true;
-
 	}, 300)
 	
 })
@@ -697,9 +685,6 @@ $(document).on(touchEvent,'.tokenTileContainer.potentialNatureCube.natureCubeTok
 		$('.previouslyChosenTokenContainer').removeClass('previouslyChosenTokenContainer');
 	}, 400)
 })
-
-
-
 
 $(document).on(touchEvent,'.tokenTileContainer.natureCubeClearTokens .tokenContainer:not(.currentTokenAnimation):not(.lockAllTokens)',function(){
 	//This code runs when the player has chosen to use a nature cube to clear any number of tokens BEFORE taking their actual turn
@@ -1271,8 +1256,6 @@ function confirmTilePlacement() {
 	// mapStats.tileExtremes.row.bottom
 	// mapStats.tileExtremes.column.left
 	// mapStats.tileExtremes.column.right
-
-
 	
 	if((mapStats.centerRow - confirmedTileRow) >= mapStats.tileExtremes.row.top) {
 		mapStats.tileExtremes.row.top = mapStats.centerRow - confirmedTileRow;
@@ -1281,9 +1264,7 @@ function confirmTilePlacement() {
 			mapStats.directionStatus.up = 'unlocked';
 			$('#upArrow').show();
 		}
-		
 	}
-
 	
 	if((mapStats.centerRow - confirmedTileRow) < mapStats.tileExtremes.row.bottom) {
 		mapStats.tileExtremes.row.bottom = mapStats.centerRow - confirmedTileRow;
@@ -1298,7 +1279,6 @@ function confirmTilePlacement() {
 	// convert the column string into a num and store in 'confirmedTileColumn' var
 	var confirmedTileColumn = parseInt(splitConfirmedTileID[3]);
 
-	
 	if((mapStats.centerColumn - confirmedTileColumn) > mapStats.tileExtremes.column.left) {
 		mapStats.tileExtremes.column.left = mapStats.centerColumn - confirmedTileColumn;
 
@@ -1306,11 +1286,8 @@ function confirmTilePlacement() {
 			mapStats.directionStatus.left = 'unlocked';
 			$('#leftArrow').show();
 		}
-
 	}
 
-
-	
 	if((mapStats.centerColumn - confirmedTileColumn) < mapStats.tileExtremes.column.right) {
 		mapStats.tileExtremes.column.right = mapStats.centerColumn - confirmedTileColumn;
 
@@ -1318,7 +1295,6 @@ function confirmTilePlacement() {
 			mapStats.directionStatus.right = 'unlocked';
 			$('#rightArrow').show();
 		}
-
 	}
 
 	// the newly placed tile container is now being directly targetted to store the various aspects of it
@@ -1380,7 +1356,6 @@ function confirmTilePlacement() {
 					for (let l = 0; l < confirmedTileWildlife.length; l++) {
 						mapData[i][j].wildlife.push(confirmedTileWildlife[l]);
 					}
-
 				}
 			}
 		}
@@ -1389,7 +1364,6 @@ function confirmTilePlacement() {
 	// the .lastPlacedTile class is added for the purposes of the undo button (to identify which map hex contains the tileContainer element to be moved back to the display area)
 	// it is added AFTER the checkMapConstraints() function in case the map is extended and re-rendered, so that the .lastPlacedTile class is not removed in the process
     $('#' + confirmedTileID).addClass('lastPlacedTile');
-
 }
 
 function cancelTilePlacement(mode) {
@@ -1449,7 +1423,6 @@ function cancelTilePlacement(mode) {
 		// the opaque yellow hexes are faded out are now removed since enough time has elapsed for it to fade out
 		$('.validPlacement').remove();
 	}, 400)
-
 }
 
 function confirmInvalidTokenPlacementFunction() {
@@ -1475,7 +1448,6 @@ function confirmInvalidTokenPlacementFunction() {
 		$('.tokenTileContainer.chosenTokenTileContainer .tokenContainer .duplicateToken').fadeOut();
 		$('.tokenTileContainer.chosenTokenTileContainer .tokenContainer .redCross').fadeOut();
 	}, 500)
-
 
 	setTimeout(function(){
 		// now that time has elapsed for the inactive version of the removed token and the red cross to be hidden, they can now be removed from the game
@@ -1510,7 +1482,6 @@ function confirmInvalidNatureCubeTokenPlacementFunction() {
 		$('.tokenTileContainer.potentialNatureCube.natureCubeToken.chosenNatureCubeTokenParent .tokenContainer.chosenNatureCubeToken .duplicateToken').fadeOut();
 		$('.tokenTileContainer.potentialNatureCube.natureCubeToken.chosenNatureCubeTokenParent .tokenContainer.chosenNatureCubeToken .redCross').fadeOut();
 	}, 1000)
-
 
 	setTimeout(function(){
 		// now that time has elapsed for the inactive version of the removed token and the red cross to be hidden, they can now be removed from the game
@@ -1561,7 +1532,6 @@ function undoTilePlacementFunction() {
 			}
 		}
 	}
-
 
 	if($('.tokenTileContainer.chosenTokenTileContainer').length) {
 		// NON-NATURE TOKEN CODE
@@ -1623,8 +1593,6 @@ function undoTilePlacementFunction() {
 		// move the last placed tile from the map hex where it currently is back to the display area from where it originated
 		$('.mapTileContainer.lastPlacedTile .tileContainer').parentToAnimate($('.tokenTileContainer.chosenNatureCubeTileParent'), 1000);
 
-		
-		
 		// Again the code checks to see if another token has previously been chosen - if it has the below code is actioned in order to remove the appropraite elements and classes
 		if($('.tokenTileContainer.potentialNatureCube.natureCubeToken .tokenContainer .activeToken').length) {
 			// Create the standard default token image and insert it into the current chosen token container
@@ -1646,7 +1614,6 @@ function undoTilePlacementFunction() {
 				// reset the currentChosenWildlife variable
 				currentChosenWildlife = '';
 			}, 400)
-
 		}
 
 		setTimeout(function(){
@@ -1698,7 +1665,6 @@ function removeSoloTilesTokens(){
 	if(turnsLeft == 1) {
 		endOfGameNotification();
 	} else {
-
 		// Now the next turn is soon to start, the .chosenTokenTileContainer class can be removed ready for the next turn to start
 		$('.chosenTokenTileContainer').removeClass('chosenTokenTileContainer');
 		
@@ -1729,7 +1695,6 @@ function removeSoloTilesTokens(){
 				break;
 			}
 		}
-
 	
 		// the HTML code for the yeti hand to remove the chosen tile is stored in the yetiTileRemoval variable
 		var yetiTileRemoval = `
@@ -1776,7 +1741,6 @@ function removeSoloTilesTokens(){
 			$('.yeti-container').remove();
 			pickNewTilesTokens();
 		}, 2800)
-
 	}
 
 }
@@ -1898,7 +1862,6 @@ function pickNewTilesTokens() {
 		checkDuplicateTokens();
 		
 	}, 1000)
-
 }
 
 // this function is triggered at the start of the game to choose the amount of tiles to use (once they're all used the game is over)
@@ -2434,10 +2397,7 @@ function initiateMap() {
 }
 
 function loadStartingTileDetails(startingTile){
-
-
 	// : "bear"
-
 	let startingMapHexIDs = ['row-20-column-20', 'row-21-column-19', 'row-21-column-20']
 	let startingMapHexRows = [];
 	let startingMapHexColumns = [];
@@ -2494,9 +2454,7 @@ function generateMap() {
 						} else {
 							mapHTML += mapData[i][j].wildlife[k];
 						}
-						
 					}
-
 				}
 				
 				mapHTML += '" tilewildlife="' + mapData[i][j].wildlife.length + '" tilerotation="' + mapData[i][j].rotation + '">'
@@ -2512,11 +2470,9 @@ function generateMap() {
 					for (let k = 0; k < mapData[i][j].wildlife.length; k++) {
 						mapHTML +=  '<img class="tileToken wildlifeToken-' + (k + 1) + '" src="img/tokens/' + mapData[i][j].wildlife[k] + '.png">';
 					}
-
 				}
 
 				mapHTML +=  '</div>';
-
 
 			} else {
 				mapHTML +=  '">';
@@ -2560,7 +2516,6 @@ function generateMap() {
 	mapHTML += '<button id="rotateTileCounterclockwise" class="button is-link">Rotate Counterclockwise</button>';
 	mapHTML += '<button id="rotateTileClockwise" class="button is-primary">Rotate Clockwise</button>';
 	
-
 	mapHTML += '</div>';
 
 	// the map is generated and all the exisiting information has been replaced
@@ -2570,7 +2525,6 @@ function generateMap() {
 		$('.nonNatureCubeButton').hide();
 		$('.natureCubeButton').show();
 	}
-
 	$('.navArrow').show();
 
 }
@@ -2638,9 +2592,7 @@ function neighbourTiles(tileID) {
 		potentialPlacements.push('row-' + (thisRow + 1)  + '-column-' + (thisColumn));
 		potentialPlacements.push('row-' + (thisRow)  + '-column-' + (thisColumn - 1));
 	}
-
 	return potentialPlacements;
-
 }
 
 function updateNextTurn(mode){
@@ -2658,7 +2610,6 @@ function updateNextTurn(mode){
 	if(turnsLeft == 0) {
 		$('#turnsAndNatureTokenContainer').addClass('has-text-danger');
 	}
-	
 }
 
 function activateTokenPlacement(mode) {
@@ -2714,7 +2665,6 @@ function activateTokenPlacement(mode) {
 			// since there is a match, the "validTokenPlacements" variable is set to true
 			validTokenPlacements = true;
 		}
-
 	});
 
 	// if the thisWildlifeNum remains false, it means there were no map hexes that matched with the currently chosen token - therefore the "remove token" modal is now activated to give the players either the choice of bailing to pick another tile+token combination, or to continue in order to remove the token from the game
@@ -2733,228 +2683,12 @@ function activateTokenPlacement(mode) {
 			$('#noValidPlacementNatureCubeModal .modal-content .notification .invalidTokenImg').html('<img class="removedToken" src="img/tokens/' + currentChosenWildlife + 'Inactive.png" alt=""><img class="removeTokenRedCross" src="img/cross.png" />');
 	
 		}
-	
 	}
-
 }
-
-function shuffle(array) {
-	var currentIndex = array.length, temporaryValue, randomIndex;
-  
-	// While there remain elements to shuffle...
-	while (0 !== currentIndex) {
-  
-	  // Pick a remaining element...
-	  randomIndex = Math.floor(Math.random() * currentIndex);
-	  currentIndex -= 1;
-  
-	  // And swap it with the current element.
-	  temporaryValue = array[currentIndex];
-	  array[currentIndex] = array[randomIndex];
-	  array[randomIndex] = temporaryValue;
-	}
-  
-	return array;
-}
-
-Object.defineProperties(Array.prototype, {
-    count: {
-        value: function(value) {
-            return this.filter(x => x==value).length;
-        }
-    }
-});
-
-// Usage:
-// $('.box').parentToAnimate($('.new-parent'), 200);
-// $('.box').parentToAnimate($('.new-parent'), 'slow');
-// $('.box').parentToAnimate('.new-parent', 'slow');
-
-jQuery.fn.extend({
-    // Modified and Updated by MLM
-    // Origin: Davy8 (http://stackoverflow.com/a/5212193/796832)
-    parentToAnimate: function(newParent, duration) {
-
-        duration = duration || 'slow';
-        
-		var $element = $(this);
-
-		newParent = $(newParent); // Allow passing in either a JQuery object or selector
-
-		var oldOffset = $element.offset();
-        $(this).appendTo(newParent);
-        var newOffset = $element.offset();
-        
-		var temp = $element.clone().appendTo('body');
-
-		let startTransformVal = 'scale(1)';
-		let endTransformVal = 'scale(1)';
-
-		let transformProperty = $('#container').css('transform');
-
-		if(transformProperty != 0) {
-			endTransformVal = transformProperty;
-		}
-
-		if($element[0].className == 'earnedNatureToken') {
-
-			temp.css({
-				'position': 'absolute',
-				'top': oldOffset.top,
-				'left': oldOffset.left,
-			});
-			
-			$element.hide();
-
-			temp.animate({
-				'top': newOffset.top - 20,
-				'left': newOffset.left - 100,
-			}, 1300, function() {
-				$element.remove();
-				temp.remove();
-			});
-
-		} else if($element[0].className == 'tileContainer' || $element[0].className == 'tileContainer lockedIn' || $element[0].className == 'tileContainer chosenNatureCubeTile lockedIn' || $element[0].className == 'activeToken') {
-
-			let zoomScale = Number(zoomLevel)/10;
-
-			let startWidth = 0;
-			let startHeight = 0;
-			let endWidth = 0;
-			let endHeight = 0;
-
-			let startOpacity = 0;
-			let endOpacity = 0;
-
-			
-			if(newParent[0].offsetParent.id == 'mapHiddenOverlay') {
-
-				startWidth = $element[0].offsetWidth;
-				startHeight = $element[0].offsetHeight;
-				
-				endWidth = startWidth * zoomScale;
-				endHeight = startHeight * zoomScale;
-
-				startOpacity = 1;
-				endOpacity = 1;
-
-			} else if(newParent[0].offsetParent.id == 'tileTokenContainer') {
-
-				endWidth = $element[0].offsetWidth;
-				endHeight = $element[0].offsetHeight;
-				
-				startWidth = endWidth * zoomScale;
-				startHeight = endHeight * zoomScale;
-
-				startOpacity = 1;
-				endOpacity = 0.75;
-
-			}
-
-			temp.css({
-				'position': 'absolute',
-				'left': oldOffset.left,
-				'top': oldOffset.top,
-				'transform': startTransformVal,
-				'width': startWidth,
-				'height': startHeight,
-				'opacity': startOpacity,
-				'zIndex': 1000
-			});
-			
-			$element.hide();
-
-			temp.animate({
-				'top': newOffset.top,
-				'transform': endTransformVal,
-				'left': newOffset.left,
-				'width': endWidth,
-				'height': endHeight,
-				'opacity': endOpacity
-			}, duration, function() {
-				$element.show();
-				temp.remove();
-			});
-
-		} else if($element[0].className == 'tileContainer movingElementOpacity' || $element[0].className == 'token movingElementOpacity') {
-
-			temp.css({
-				'position': 'absolute',
-				'left': oldOffset.left,
-				'top': oldOffset.top,
-				'transform': startTransformVal,
-				'opacity': .75,
-				'zIndex': 1000
-			});
-			
-			$element.hide();
-
-			temp.animate({
-				'top': newOffset.top,
-				'transform': endTransformVal,
-				'left': newOffset.left,
-				'opacity': .75
-			}, duration, function() {
-				$element.show();
-				temp.remove();
-				$element.css('opacity', '1');
-			});
-
-		} else {
-
-			temp.css({
-				'position': 'absolute',
-				'left': oldOffset.left,
-				'top': oldOffset.top,
-				'transform': startTransformVal,
-				'zIndex': 1000
-			});
-			
-			$element.hide();
-
-			temp.animate({
-				'top': newOffset.top,
-				'transform': endTransformVal,
-				'left': newOffset.left
-			}, duration, function() {
-				$element.show();
-				temp.remove();
-			});
-
-		}
-
-    }
-});
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-}
-
-function countInArray(array, what) {
-    var count = 0;
-    for (var i = 0; i < array.length; i++) {
-        if (array[i] === what) {
-            count++;
-        }
-    }
-    return count;
-}
-
-// $(document).on(touchEvent,'body',function(){
-	
-
-// })
-
-// $("#main-side-menu").click(function(e) {
-// 	e.stopPropagation();
-// });
-
 
 function endOfGameNotification() {
 	// run this function once the human player places all of their 21 tiles
-
 	// remove the displayed tiles and tokens area (since we don't need them anymore)
-
 	updateNextTurn('nextTurn');
 	$('#lastTurnModal').addClass('is-active');
 
@@ -2983,6 +2717,7 @@ function endOfGameSetup() {
 		var scoringTableHTML = `
 		<div id="scoringTable-finalScoringContainer" class="finalScoringItem inactiveScoringItem">
 				<img class="scoringTableImage" src="img/scoring/full-scoring-table.jpg" alt="" />
+
 				<table id="wildlifeScoringTable" cellpadding="0" cellspacing="0" class="finalScoringTable">
 					<tbody>
 						<tr>		
@@ -3058,7 +2793,6 @@ function endOfGameSetup() {
 					</tbody>
 				</table>
 
-
 				<table id="habitatBonusScoringTable" cellpadding="0" cellspacing="0" class="finalScoringTable">
 					<tbody>
 						<tr>		
@@ -3093,12 +2827,6 @@ function endOfGameSetup() {
 						</tr>
 					</tbody>
 				</table>
-
-
-
-
-
-
 				<p id="finalScore">Final score: <span class="has-text-weight-bold"><span id="scoreVal">0</span> points</span></p>
 			</div>
 
@@ -3172,22 +2900,37 @@ function endOfGameSetup() {
 		$('body').fadeIn('slow');
 	}, 600)
 
-	// debugShowTileIDs();
-
 }
 
 function debugShowTileIDs(){
 	$('.mapTileContainer.placedTile').each(function(){
-
-		let currentTileID = $(this).attr('id');
-		let splitCurrentTileID = currentTileID.split('-');
-
-		let thisRow = parseInt(splitCurrentTileID[1]);
-		let thisColumn = parseInt(splitCurrentTileID[3]);
-
-		$(this).append(`<p class="debugTileCoords">${thisRow}-${thisColumn}</p>`);
-
+		if($(this).hasClass('placedToken')) {
+			let currentTileID = $(this).attr('id');
+			let splitCurrentTileID = currentTileID.split('-');
+	
+			let thisRow = parseInt(splitCurrentTileID[1]);
+			let thisColumn = parseInt(splitCurrentTileID[3]);
+	
+			$(this).append(`<p class="debugTileCoords">${thisRow}-${thisColumn}</p>`);
+		} else {
+			$(this).remove();
+		}
 	})
+
+	$('body.gameOver #mapContainer').css({
+		'height': '70vw',
+		'width': '97vw',
+		'position': 'absolute',
+		'top': '0vw',
+		'left': '0vw',
+		'z-index': '99'
+	})
+
+	$('body.gameOver #mapContainer #mapHiddenOverlay').css({
+		'top': '0px',
+		'left': '420px',
+	})
+
 }
 
 
@@ -3348,9 +3091,6 @@ function updateSubtotal(tableID, category) {
 		}
 	});
 
-	console.log(`subTotalID[0] = ${subTotalID[0]}`);
-	console.log(`subTotal = ${subTotal}`);
-
 	$('.subtotalCell #' + subTotalID[0] + '-Subtotal').html(subTotal);
 
 	updateTotalScore();
@@ -3394,8 +3134,6 @@ function checkForBlanks() {
 function setupFinalScoring() {
 
 	$('#natureTokensScoringInput').html(natureCubesNum);
-
-	// updateTokenImages();
 
 	$('#mapHiddenOverlay .mapTileContainer .placedWildlifeToken').each(function(){
 		let tokenWildlife = $(this).attr('wildlife');
@@ -3621,31 +3359,20 @@ function processPlacedTilesAndTokens() {
 				}
 
 				if(mapData[i][j].placedToken) allPlacedTokens['row-' + thisRow + '-column-' + thisColumn] = mapData[i][j].placedToken;
-
-				// row-19-column-20: "bear"
-				// row-20-column-20: "salmon"
-				// row-20-column-21: "fox"
-				// row-21-column-19: "elk"
-				// row-21-column-20: "fox"
-
 				tileNum++;
 			}
 		}
 	}
 
-
 	const tileIDs = Object.keys(allPlacedTiles);
 			
 	for (const tileID of tileIDs) {
 
-
 		let thisRow = allPlacedTiles[tileID].row
 		let thisColumn = allPlacedTiles[tileID].column
-
 		
 		let rowColMapSet = thisRow % 2;
 		if(rowColMapSet != 0) rowColMapSet = 1;
-
 
 		for (let i = 0; i < linkedTileSides.length; i++) {
 
@@ -3653,22 +3380,11 @@ function processPlacedTilesAndTokens() {
 			let newColumn = thisColumn + linkedTileSides[i].rowColMapping[rowColMapSet].colDif;		
 			let newTileID = 'row-' + newRow + '-column-' + newColumn;
 
-
 			if(allPlacedTiles.hasOwnProperty(newTileID)) {
-
-
 				let matchedIndexes = linkedTileSides[i].indexMatch.split('-');
-
-
 				if(allPlacedTiles[tileID].habitatSides[matchedIndexes[0]] == allPlacedTiles[newTileID].habitatSides[matchedIndexes[1]]) {
-
-
 					let thisTileNum = allPlacedTiles[tileID].tileNum;
-					
 					let matchedTileNum = allPlacedTiles[newTileID].tileNum;
-
-				
-
 					habitatMatches[allPlacedTiles[tileID].habitatSides[matchedIndexes[0]]].tilesWithMatchedHabitats.push(thisTileNum + '-' + matchedTileNum);
 				}
 			}
@@ -3676,9 +3392,6 @@ function processPlacedTilesAndTokens() {
 	}
 
 	let oldHabitatMatches = JSON.parse(JSON.stringify(habitatMatches))
-
-
-
 	const allHabitats = Object.keys(habitatMatches);
 			
 	for (const currentHabitat of allHabitats) {
@@ -3725,11 +3438,8 @@ function processPlacedTilesAndTokens() {
 						}
 
 						let lastTileChecked = tileQueue.shift();
-
 						thisTileGroup.push(lastTileChecked);
-
 					}
-
 
 					if(thisTileGroup.length > habitatMatches[currentHabitat].largestSet) {
 						habitatMatches[currentHabitat].largestSet = thisTileGroup.length;
@@ -3800,7 +3510,6 @@ function calculateBearTokenScoring() {
 					// Continue with the specified scoring process for this wildlife'
 					if(allPlacedTokens[neighbourTiles[i]] == 'bear') {
 						potentialTokenIDs.push(neighbourTiles[i]);
-
 					}
 				}
 			}
@@ -3810,131 +3519,383 @@ function calculateBearTokenScoring() {
 				// Need to now make sure there's no bears touching the matched neighbour tile before locking it in for scoring
 
 				let potentialBearPairNeighbourTiles = neighbourTileIDs(potentialTokenIDs[0]);
-
 				for (let i = 0; i < potentialBearPairNeighbourTiles.length; i++) {
-
 					if(allPlacedTokens.hasOwnProperty(potentialBearPairNeighbourTiles[i])) {
-
 						// The neighbouring tile exists and has a placed token on it!
 						// Continue with the specified scoring process for this wildlife'
 	
 						if(allPlacedTokens[potentialBearPairNeighbourTiles[i]] == 'bear') {
 							potentialTokenIDs.push(potentialBearPairNeighbourTiles[i]);
-
 						}
 					}
 				}
-
 				if(potentialTokenIDs.length == 2) {
 					if(confirmedBearPairs <= 4) confirmedBearPairs++;
 				}
 			}
 			usedTokenIDs.push(...potentialTokenIDs);
-
 		}
 	}
 
 	if(confirmedBearPairs != 0) {
-
 		tokenScoring.bear.totalScore = bearScoringValues[confirmedBearPairs];
 	}
 
-	
+}
 
+let allElkTokens = [];
+let usedElkTokenIDs = [];
+let potentialElkLines = [];
+let confirmedElkLines = [];
+
+let potentialElkLineStartingTokens = {
+	'E': [],
+	'SE': [],
+	'SW': []
+}
+
+let elkScoringValues = {
+	'1': 2,
+	'2': 5,
+	'3': 9,
+	'4': 13
 }
 
 function calculateElkTokenScoring() {
 
-	let elkScoringValues = {
-		'1': 2,
-		'2': 5,
-		'3': 9,
-		'4': 13
+	const tokenIDs = Object.keys(allPlacedTokens);
+	for (const tokenID of tokenIDs) {
+		if(allPlacedTokens[tokenID] == 'elk') {
+			allElkTokens.push(tokenID);
+		}
+	}
+	
+
+	if(allElkTokens.length != 0) {
+		if(allElkTokens.length == 1) {
+			usedElkTokenIDs.push(allElkTokens[0]);			
+			confirmedElkLines.push(allElkTokens);
+		} else {
+			generateAllElkLines();
+		}
 	}
 
-	let confirmedElkLines = [];
+	if(confirmedElkLines.length > 0) {
+		confirmedElkLines.sort(function (a, b) {
+			return b.length - a.length;
+		});
 
-	let potentialTokenIDs = [];
-	let usedTokenIDs = [];
-	
-	const tokenIDs = Object.keys(allPlacedTokens);
+		for (let i = 0; i < confirmedElkLines.length; i++) {			
+			let elkInLineNum = confirmedElkLines[i].length;
+			tokenScoring.elk.totalScore += elkScoringValues[elkInLineNum];
+		}
+	}
+}
 
-	let allPotentialElkLines = [];
-	let potentialElkLine = [];
+let sharedElkTokenIDs = {};
+let allLineDetails = {};
+let allLineCombinations = [];
 
-	for (const tokenID of tokenIDs) {
+function generateAllElkLines(){
 
-		potentialElkLine = [];
+	// first remove all elk tokens just by themselves
 
-		if(allPlacedTokens[tokenID] == 'elk') {
+	for (let i = allElkTokens.length - 1; i >= 0; i--) {
 
-			if(usedTokenIDs.indexOf(tokenID) === -1) {
-				potentialElkLine = [tokenID];
-				let neighbourTiles = neighbourTileIDs(tokenID);
+		let neighbouringElk = searchNeighbourTilesForWildlife(allElkTokens[i], 'elk');
 
-				let neighbourElkTokens = [];
-				let elkDirectionIndex = [];
+		// no neibouring elk means the token is just by itself
+		// add it as a separate run and add it's ID to the used tokens pool - also removing it from the allTokens variable
+		if(neighbouringElk.length == 0) {			
+			confirmedElkLines.push([allElkTokens[i]]);
+			usedElkTokenIDs.push(allElkTokens[i]);			
+			allElkTokens.splice(i,1);
+		}
+	}
 
-				for (let i = 0; i < neighbourTiles.length; i++) {
+	for (let i = 0; i < allElkTokens.length; i++) {
+		let validStartingLineDirection = []
+		validStartingLineDirection = checkValidStartingElkToken(allElkTokens[i]);
+		if(validStartingLineDirection.length != 0) {
+			for (let j = 0; j < validStartingLineDirection.length; j++) {				
+				potentialElkLineStartingTokens[validStartingLineDirection[j]].push(allElkTokens[i]);
+			}
+		}
+	}
+		
+	const allDirections = Object.keys(potentialElkLineStartingTokens);
+	for (const currentDirection of allDirections) {
+		for (let i = 0; i < potentialElkLineStartingTokens[currentDirection].length; i++) {
+			let currentPotentialElkLine = [];
+			currentPotentialElkLine = allElkTokensInLine(potentialElkLineStartingTokens[currentDirection][i], currentDirection);						
+			potentialElkLines.push(currentPotentialElkLine);
+		}
+	}
 
-					if(allPlacedTokens.hasOwnProperty(neighbourTiles[i])) {
+	potentialElkLines.sort(function (a, b) {
+		return b.length - a.length;
+	});
 
-						if(allPlacedTokens[neighbourTiles[i]] == 'elk') {
+	// Now check to see if the potential lines have any shared neighbours or not
 
-							if(usedTokenIDs.indexOf(neighbourTiles[i]) === -1) {
-								neighbourElkTokens.push(neighbourTiles[i]);
-								elkDirectionIndex.push(i);
-							}
-						}
-					}
-				}
+	let checkedIndexCombos = [];
+	let allDuplicateLineIndexes = [];
 
-				if (neighbourElkTokens && neighbourElkTokens.length) {
-					if(neighbourElkTokens.length == 1) {
-						let direction = linkedTileSides[elkDirectionIndex[0]].direction;
-						let connectedElkTilesInLine = allTokensInLine(tokenID, direction, 'elk');
-
-						potentialElkLine.push(...connectedElkTilesInLine);
-
-					} else if(neighbourElkTokens.length > 1) {
-
-						let tempElkLines = [];
-
-						for (let i = 0; i < neighbourElkTokens.length; i++) {
-							let tempDirection = linkedTileSides[elkDirectionIndex[i]].direction;
-
-							let tempConnectedElkTilesInLine = allTokensInLine(tokenID, tempDirection, 'elk');
-
-							tempElkLines.push(tempConnectedElkTilesInLine);
-						}
-
-						tempElkLines.sort(function (a, b) {
-							return b.length - a.length;
-						});
+	for (let i = potentialElkLines.length - 1; i >= 0; i--) {
+		allLineDetails['line' + (i + 1)] = [...potentialElkLines[i]];
+		for (let j = 0; j < potentialElkLines.length; j++) {
+			let thisIndexCombo = `${i}-${j}`;
+			let altIndexCombo = `${j}-${i}`;
 						
-						potentialElkLine.push(...tempElkLines[0]);
+			if(checkedIndexCombos.indexOf(thisIndexCombo) == -1 && checkedIndexCombos.indexOf(altIndexCombo) == -1 && i != j) {				
+								
+				allDuplicateLineIndexes.push(i, j);
+				checkedIndexCombos.push(thisIndexCombo);
+				let sharedElkTokenDetected = false;
+				sharedElkTokenDetected = potentialElkLines[i].some(r=> potentialElkLines[j].indexOf(r) >= 0);
+				
+				if(sharedElkTokenDetected)  {
+					let thisSharedTile = returnDuplicates(potentialElkLines[i], potentialElkLines[j]);
 
+					if(!sharedElkTokenIDs.hasOwnProperty(thisSharedTile)) {
+						sharedElkTokenIDs[thisSharedTile] = {
+							includedLines: []
+						}
+					}
+
+					let matchedLineOne = 'line' + (i + 1);
+					let matchedLineTwo = 'line' + (j + 1);
+										
+					if(sharedElkTokenIDs[thisSharedTile].includedLines.indexOf(matchedLineOne) === -1) {						
+						sharedElkTokenIDs[thisSharedTile].includedLines.push(matchedLineOne);
+					}
+
+					if(sharedElkTokenIDs[thisSharedTile].includedLines.indexOf(matchedLineTwo) === -1) {						
+						sharedElkTokenIDs[thisSharedTile].includedLines.push(matchedLineTwo);
 					}
 				}
-
-				allPotentialElkLines.push(potentialElkLine);
-				usedTokenIDs.push(...potentialElkLine);
-
 			}
 		}
 	}
 
-	if(allPotentialElkLines.length > 0) {
+	let uniqueDuplicateLineIndexes = allDuplicateLineIndexes.filter(onlyUnique);
 
-		allPotentialElkLines.sort(function (a, b) {
-			return b.length - a.length;
-		});
+	if(uniqueDuplicateLineIndexes.length != potentialElkLines.length) {
+		uniqueDuplicateLineIndexes.sort((a, b) => a - b);
 
-		for (let i = 0; i < allPotentialElkLines.length; i++) {
-			let elkInLineNum = allPotentialElkLines[i].length;
-			tokenScoring.elk.totalScore += elkScoringValues[elkInLineNum];
+		for (let i = 0; i < potentialElkLines.length; i++) {
+			if(uniqueDuplicateLineIndexes.indexOf(i) == -1) {
+				processStandaloneElkLine(potentialElkLines[i]);
+			}
 		}
 	}
+
+	let sharedTilesLinesCombo = []
+	const allSharedTiles = Object.keys(sharedElkTokenIDs);
+
+	for (const sharedTile of allSharedTiles) {
+		let currentArray = [];
+		for (let i = 0; i < sharedElkTokenIDs[sharedTile].includedLines.length; i++) {
+						
+			let sharedElkTokenIDsClone = sharedElkTokenIDs[sharedTile].includedLines.slice();
+			sharedElkTokenIDsClone.splice(i,1);
+						
+			let matchedLinesConvertedToText = '';
+			for (let j = 0; j < sharedElkTokenIDsClone.length; j++) {
+				matchedLinesConvertedToText += sharedElkTokenIDsClone[j];
+				if((j + 1) != sharedElkTokenIDsClone.length) {
+					matchedLinesConvertedToText += '-';
+				}
+			}
+			currentArray.push(`${matchedLinesConvertedToText}_${sharedTile}`);
+		}
+		sharedTilesLinesCombo.push(currentArray);
+	}
+		
+	let allTileCombinations = allPossibleCases(sharedTilesLinesCombo);		
+
+	let allPotentialLineCombinations = [];
+	let allPotentialLineCombinationsScores = [];
+
+	for (let i = 0; i < allTileCombinations.length; i++) {
+		let copyOfLines = JSON.parse(JSON.stringify(allLineDetails));
+		let thisTileCombination = allTileCombinations[i].split(' ');
+		let currentLineCombination = [];
+
+		for (let j = 0; j < thisTileCombination.length; j++) {
+						
+			let splitTileCombination = thisTileCombination[j].split('_');
+			let linesToBeExcludedUnsplit = splitTileCombination[0].toString();
+			let linesToBeExcluded = linesToBeExcludedUnsplit.split('-');
+			let tileToRemove = splitTileCombination[1].toString();
+			
+			for (let k = 0; k < linesToBeExcluded.length; k++) {
+				let thisLine = linesToBeExcluded[k].toString();
+				let tileIndex = copyOfLines[thisLine].indexOf(tileToRemove);
+							
+				copyOfLines[thisLine][tileIndex] = 'undefined';
+			}
+		}
+
+		let currentLineVariations = [];
+		const allLines = Object.keys(copyOfLines);
+		
+		for (const thisLine of allLines) {
+	
+			let currentLineGroup = [];
+			currentLineGroup[0] = [];
+
+			for (let k = 0, l = 0; k < copyOfLines[thisLine].length; k++) {
+				if(copyOfLines[thisLine][k] != 'undefined') {
+					if(currentLineGroup[l].length == 4) {
+						l++;
+						currentLineGroup[l] = [];
+					}
+					currentLineGroup[l].push(copyOfLines[thisLine][k]);
+				} else {
+					if(currentLineGroup[l].length > 0) {
+						l++;
+						currentLineGroup[l] = [];
+					}
+				}
+			}
+
+			if(currentLineGroup.length != 0) {
+				for (let l = currentLineGroup.length - 1; l >= 0; l--) {
+					if(currentLineGroup[l].length == 0) {
+						currentLineGroup.splice(l,1);
+					}
+				}			
+									
+				currentLineVariations.push(...currentLineGroup);
+			}
+		}
+
+		let currentLineVariationScore = 0;
+
+		for (let m = 0; m < currentLineVariations.length; m++) {
+			currentLineVariationScore += elkScoringValues[currentLineVariations[m].length];
+		}
+
+		allPotentialLineCombinations.push(currentLineVariations);
+		allPotentialLineCombinationsScores.push(currentLineVariationScore);
+
+	} 
+
+	let highestScoreIndex = indexOfMax(allPotentialLineCombinationsScores);
+	confirmedElkLines.push(...allPotentialLineCombinations[highestScoreIndex]);
+}
+
+function processStandaloneElkLine(thisElkLine) {
+
+	if(thisElkLine.length <= 4) {
+		confirmedElkLines.push(thisElkLine);
+		usedElkTokenIDs.push(...thisElkLine);
+	} else {
+		var i,j,temparray,chunk = 4;
+		for (i=0,j=confirmedElkLines.length; i<j; i+=chunk) {
+			temparray = confirmedElkLines.slice(i,i+chunk);
+			confirmedElkLines.push(temparray);
+			usedElkTokenIDs.push(...temparray);
+		}
+	}
+}
+
+function checkValidStartingElkToken(thisID){
+	
+
+	let blankSides = [0, 4, 5];
+	let lineCheckSides = [3, 1, 2];
+
+	let validElkLineDirections = [];
+
+	let splitTileID = thisID.split('-');
+
+	let thisRow = parseInt(splitTileID[1]);
+	let thisColumn = parseInt(splitTileID[3]);
+
+	let rowColMapSet = thisRow % 2;
+	if(rowColMapSet != 0) rowColMapSet = 1;
+
+	for (let i = 0; i < blankSides.length; i++) {
+
+		let thisDirection = linkedTileSides[blankSides[i]].direction;
+		let thisOppositeDirection = linkedTileSides[lineCheckSides[i]].direction;
+
+		let precedingRow = thisRow + linkedTileSides[blankSides[i]].rowColMapping[rowColMapSet].rowDif;				
+		let precedingColumn = thisColumn + linkedTileSides[blankSides[i]].rowColMapping[rowColMapSet].colDif;				
+		let precedingTileID = 'row-' + precedingRow + '-column-' + precedingColumn;
+
+		let followingRow = thisRow + linkedTileSides[lineCheckSides[i]].rowColMapping[rowColMapSet].rowDif;				
+		let followingColumn = thisColumn + linkedTileSides[lineCheckSides[i]].rowColMapping[rowColMapSet].colDif;				
+		let followingTileID = 'row-' + followingRow + '-column-' + followingColumn;
+
+		let validPrecedingTile = false;
+		let validFollowingTile = false;
+
+		if(allPlacedTokens.hasOwnProperty(precedingTileID)) {
+			if(allPlacedTokens[precedingTileID] != 'elk') {				
+				validPrecedingTile = true;
+			}
+
+		} else {
+			validPrecedingTile = true;
+		}
+
+		if(allPlacedTokens.hasOwnProperty(followingTileID)) {	
+			if(allPlacedTokens[followingTileID] == 'elk') {				
+				validFollowingTile = true;
+			}
+		}
+
+		if(validPrecedingTile && validFollowingTile) {			
+			validElkLineDirections.push(thisOppositeDirection)
+		}
+
+	}
+		
+	if(validElkLineDirections.length != 0) {
+		return validElkLineDirections;
+	} else {
+		return false;
+	}
+}
+
+function allElkTokensInLine(startID, thisDirection) {
+	
+
+	let matchedLineIDs = [startID];
+
+	let lastTokenID = startID;
+	let nextTokenID = '';
+
+	let lineExhausted = false;
+	let elkLineLimit = 0;
+
+	while (!lineExhausted) {
+		nextTokenID = nextElkTokenInDirection(lastTokenID, thisDirection);		
+		if(nextTokenID) {
+			matchedLineIDs.push(nextTokenID);
+			elkLineLimit++;
+			lastTokenID = nextTokenID;
+		} else {			
+			lineExhausted = true;
+		}
+	}
+
+	if(matchedLineIDs.length > 0) {
+		for (let i = 0; i < matchedLineIDs.length; i++) {
+			const element = matchedLineIDs[i];			
+		}
+	}
+
+	return matchedLineIDs;
+}
+
+
+function getOppositeDirection(thisDirection) {
+	let obj = arr.find(o => o.direction === thisDirection);
+	return obj.oppositeDirection;
 }
 
 function calculateFoxTokenScoring() {
@@ -4075,34 +4036,17 @@ function calculateSalmonTokenScoring() {
 					confirmedNeighbourSalmon.push(potentialNeighbourSalmon[k]);
 				}
 			}
-
-			//"row-18-column-18"
-			console.log(`confirmedNeighbourSalmon`);
-			console.log(confirmedNeighbourSalmon);
 	
 			if(confirmedNeighbourSalmon.length == 2) {
 				let tilesToCheck = [validSalmonTiles[j]];
 				tilesToCheck.push(...confirmedNeighbourSalmon);
 	
-				console.log(`tilesToCheck`);
-				console.log(tilesToCheck);
-	
 				let firstNeighbourTiles = neighbourTileIDs(confirmedNeighbourSalmon[0]);
-	
-				console.log(`firstNeighbourTiles`);
-				console.log(firstNeighbourTiles);
-	
 				let secondNeighbourTiles = neighbourTileIDs(confirmedNeighbourSalmon[1]);
 	
-				console.log(`secondNeighbourTiles`);
-				console.log(secondNeighbourTiles);
-				
 				if(firstNeighbourTiles.indexOf(confirmedNeighbourSalmon[1]) === -1 && secondNeighbourTiles.indexOf(confirmedNeighbourSalmon[0]) === -1) {
 					// perform a run forwards and backwards!!
 					let forwardsAndBackwardsSalmonRunIDs = forwardsAndBackwardsSalmonRun(validSalmonTiles[j], confirmedNeighbourSalmon);
-	
-					console.log(`forwardsAndBackwardsSalmonRunIDs`);
-					console.log(forwardsAndBackwardsSalmonRunIDs);
 	
 					potentialSalmonTokenIDs.push(...forwardsAndBackwardsSalmonRunIDs);
 						
@@ -4114,27 +4058,17 @@ function calculateSalmonTokenScoring() {
 				
 			} else if(confirmedNeighbourSalmon.length < 2) {
 				potentialSalmonTokenIDs.push(validSalmonTiles[j]);
-
 				let salmonRunIDs = salmonTokensInRun(validSalmonTiles[j], 'salmon');
-
-				console.log(`salmonRunIDs`);
-				console.log(salmonRunIDs);
-
 				potentialSalmonTokenIDs.push(...salmonRunIDs);
 	
 			}
-	
 			confirmedSalmonRuns.push(potentialSalmonTokenIDs);
-			
 		}
 	}
 
 	confirmedSalmonRuns.sort(function (a, b) {
 		return b.length - a.length;
 	});
-
-	console.log(`confirmedSalmonRuns`);
-	console.log(confirmedSalmonRuns);
 
 	for (let i = 0; i < confirmedSalmonRuns.length; i++) {
 		let uniqueSalmonIDs = confirmedSalmonRuns[i].filter(onlyUnique);
@@ -4167,20 +4101,13 @@ function forwardsAndBackwardsSalmonRun(firstTile, startingTiles){
 
 			let result = searchNeighbourTilesForWildlife(nextTokenID, 'salmon');
 
-			console.log(`nextTokenID ${nextTokenID}`);
-
-			console.log(`result`);
-			console.log(result);
-
 			for (let i = result.length - 1; i >= 0; i--) {
 				// Because the previous tile in the run would also be included as part of this function - we can go ahead and remove it
 				if(usedSalmonTokenIDs.indexOf(result[i]) !== -1) {
 					result.splice(i,1);
 				}
 			}
-
 			if(result.length == 1) {
-				console.log(`only valid salmon tile left = result[0] (${result[0]})`);
 				forwardsAndBackwardsSalmonRunIDs.push(result[0]);
 				usedSalmonTokenIDs.push(result[0]);
 				nextTokenID = result[0];
@@ -4190,12 +4117,7 @@ function forwardsAndBackwardsSalmonRun(firstTile, startingTiles){
 
 		}
 	}
-
-	console.log(`forwardsAndBackwardsSalmonRunIDs`);
-	console.log(forwardsAndBackwardsSalmonRunIDs);
-
 	return forwardsAndBackwardsSalmonRunIDs;
-
 }
 
 function salmonTokensInRun(startID, thisWildlife) {
@@ -4214,11 +4136,6 @@ function salmonTokensInRun(startID, thisWildlife) {
 
 		let result = searchNeighbourTilesForWildlife(nextTokenID, thisWildlife);
 
-		console.log(`nextTokenID = ${nextTokenID}`);
-
-		console.log(`result`);
-		console.log(result);
-
 		for (let i = result.length - 1; i >= 0; i--) {
 			// Because the previous tile in the run would also be included as part of this function - we can go ahead and remove it
 			if(usedSalmonTokenIDs.indexOf(result[i]) !== -1) {
@@ -4227,18 +4144,13 @@ function salmonTokensInRun(startID, thisWildlife) {
 		}
 
 		if(result.length == 1) {
-			console.log(`only valid salmon tile left = result[0] (${result[0]})`);
 			currentSalmonRunIDs.push(result[0]);
 			usedSalmonTokenIDs.push(result[0]);
 			nextTokenID = result[0];
 		} else {
 			salmonRunEnded = true;
 		}
-
 	}
-
-	console.log(`currentSalmonRunIDs`);
-	console.log(currentSalmonRunIDs);
 
 	return currentSalmonRunIDs;
 }
@@ -4260,58 +4172,15 @@ function searchNeighbourTilesForWildlife(currentID, thisWildlife) {
 		let newColumn = thisColumn + linkedTileSides[i].rowColMapping[rowColMapSet].colDif;		
 		let newTileID = 'row-' + newRow + '-column-' + newColumn;
 
-
 		if(allPlacedTokens.hasOwnProperty(newTileID)){
 			if(allPlacedTokens[newTileID] == thisWildlife) {
 				matchedTileIDs.push(newTileID);
 			}
 		}
 	}
-
+	
 	return matchedTileIDs;
 }
-
-// function checkForTriangleSalmonRun(tilesToCheck) {
-
-// 	let indexesOfNeighbouringPairs = [[1, 2], [0, 2], [0, 1]];
-
-// 	for (let i = 0; i < tilesToCheck.length; i++) {
-
-// 		let neighbourTiles = neighbourTileIDs(tilesToCheck[i]);
-// 		let salmonTokenNeighbours = [];
-		
-// 		for (let j = 0; j < neighbourTiles.length; j++) {
-// 			if(allPlacedTokens.hasOwnProperty(neighbourTiles[j])) {
-// 				if(allPlacedTokens[neighbourTiles[j]] == 'salmon') {
-// 					salmonTokenNeighbours.push(neighbourTiles[j]);
-// 				}
-// 			}
-// 		}
-
-// 		if(salmonTokenNeighbours.length == 2) {
-// 			let nonCurrentTileOne = tilesToCheck[indexesOfNeighbouringPairs[i][0]];
-// 			let nonCurrentTileTwo = tilesToCheck[indexesOfNeighbouringPairs[i][1]];
-
-// 			if(salmonTokenNeighbours.indexOf(nonCurrentTileOne) === -1 && salmonTokenNeighbours.indexOf(nonCurrentTileTwo) === -1) {
-// 				return false;
-// 			}
-// 		} else if(salmonTokenNeighbours.length > 2) {
-// 			for (let k = 0; k < salmonTokenNeighbours.length; k++) {
-// 				usedSalmonTokenIDs.push(...tilesToCheck)
-// 				if(usedSalmonTokenIDs.indexOf(salmonTokenNeighbours[k]) === -1) {
-// 					usedSalmonTokenIDs.push(salmonTokenNeighbours[k])
-// 				}
-// 			}
-// 			return false;
-// 		} else {
-// 			return false;
-// 		}
-// 	}
-
-// 	return true;
-
-// }
-
 
 function neighbourTileIDs(currentID) {
 
@@ -4338,37 +4207,7 @@ function neighbourTileIDs(currentID) {
 
 }
 
-function allTokensInLine(startID, thisDirection, thisWildlife) {
-
-	let matchedLineIDs = [];
-
-	let lastTokenID = startID;
-	let nextTokenID = '';
-
-	let lineExhausted = false;
-	let elkLineLimit = 0;
-
-	while (!lineExhausted) {
-		nextTokenID = nextTokenInDirection(lastTokenID, thisDirection);
-		if(allPlacedTokens.hasOwnProperty(nextTokenID)) {
-			if(allPlacedTokens[nextTokenID] == thisWildlife) {
-				matchedLineIDs.push(nextTokenID);
-				elkLineLimit++;
-			} else {
-				lineExhausted = true;
-			}
-		} else {
-			lineExhausted = true;
-		}
-
-		lastTokenID = nextTokenID;
-		if(elkLineLimit == 3) break;
-	}
-
-	return matchedLineIDs;
-}
-
-function nextTokenInDirection(startID, thisDirection) {
+function nextElkTokenInDirection(startID, thisDirection) {
 
 	let startIDType = typeof startID;
 	let splitTileID = startID.split('-');
@@ -4386,40 +4225,262 @@ function nextTokenInDirection(startID, thisDirection) {
 
 	let newTileID = 'row-' + newRow + '-column-' + newColumn;
 
-	return newTileID;
+	if(allPlacedTokens.hasOwnProperty(newTileID)) {
+		if(allPlacedTokens[newTileID] == 'elk' && usedElkTokenIDs.indexOf(newTileID) == -1) {
+			return newTileID;
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
 }
 
+function shuffle(array) {
+	var currentIndex = array.length, temporaryValue, randomIndex;
+  
+	// While there remain elements to shuffle...
+	while (0 !== currentIndex) {
+  
+	  // Pick a remaining element...
+	  randomIndex = Math.floor(Math.random() * currentIndex);
+	  currentIndex -= 1;
+  
+	  // And swap it with the current element.
+	  temporaryValue = array[currentIndex];
+	  array[currentIndex] = array[randomIndex];
+	  array[randomIndex] = temporaryValue;
+	}
+  
+	return array;
+}
 
+Object.defineProperties(Array.prototype, {
+    count: {
+        value: function(value) {
+            return this.filter(x => x==value).length;
+        }
+    }
+});
+
+
+jQuery.fn.extend({
+    // Modified and Updated by MLM
+    // Origin: Davy8 (http://stackoverflow.com/a/5212193/796832)
+    parentToAnimate: function(newParent, duration) {
+
+        duration = duration || 'slow';
+        
+		var $element = $(this);
+
+		newParent = $(newParent); // Allow passing in either a JQuery object or selector
+
+		var oldOffset = $element.offset();
+        $(this).appendTo(newParent);
+        var newOffset = $element.offset();
+        
+		var temp = $element.clone().appendTo('body');
+
+		let startTransformVal = 'scale(1)';
+		let endTransformVal = 'scale(1)';
+
+		let transformProperty = $('#container').css('transform');
+
+		if(transformProperty != 0) {
+			endTransformVal = transformProperty;
+		}
+
+		if($element[0].className == 'earnedNatureToken') {
+
+			temp.css({
+				'position': 'absolute',
+				'top': oldOffset.top,
+				'left': oldOffset.left,
+			});
+			
+			$element.hide();
+
+			temp.animate({
+				'top': newOffset.top - 20,
+				'left': newOffset.left - 100,
+			}, 1300, function() {
+				$element.remove();
+				temp.remove();
+			});
+
+		} else if($element[0].className == 'tileContainer' || $element[0].className == 'tileContainer lockedIn' || $element[0].className == 'tileContainer chosenNatureCubeTile lockedIn' || $element[0].className == 'activeToken') {
+
+			let zoomScale = Number(zoomLevel)/10;
+
+			let startWidth = 0;
+			let startHeight = 0;
+			let endWidth = 0;
+			let endHeight = 0;
+
+			let startOpacity = 0;
+			let endOpacity = 0;
+
+			
+			if(newParent[0].offsetParent.id == 'mapHiddenOverlay') {
+
+				startWidth = $element[0].offsetWidth;
+				startHeight = $element[0].offsetHeight;
+				
+				endWidth = startWidth * zoomScale;
+				endHeight = startHeight * zoomScale;
+
+				startOpacity = 1;
+				endOpacity = 1;
+
+			} else if(newParent[0].offsetParent.id == 'tileTokenContainer') {
+
+				endWidth = $element[0].offsetWidth;
+				endHeight = $element[0].offsetHeight;
+				
+				startWidth = endWidth * zoomScale;
+				startHeight = endHeight * zoomScale;
+
+				startOpacity = 1;
+				endOpacity = 0.75;
+
+			}
+
+			temp.css({
+				'position': 'absolute',
+				'left': oldOffset.left,
+				'top': oldOffset.top,
+				'transform': startTransformVal,
+				'width': startWidth,
+				'height': startHeight,
+				'opacity': startOpacity,
+				'zIndex': 1000
+			});
+			
+			$element.hide();
+
+			temp.animate({
+				'top': newOffset.top,
+				'transform': endTransformVal,
+				'left': newOffset.left,
+				'width': endWidth,
+				'height': endHeight,
+				'opacity': endOpacity
+			}, duration, function() {
+				$element.show();
+				temp.remove();
+			});
+
+		} else if($element[0].className == 'tileContainer movingElementOpacity' || $element[0].className == 'token movingElementOpacity') {
+
+			temp.css({
+				'position': 'absolute',
+				'left': oldOffset.left,
+				'top': oldOffset.top,
+				'transform': startTransformVal,
+				'opacity': .75,
+				'zIndex': 1000
+			});
+			
+			$element.hide();
+
+			temp.animate({
+				'top': newOffset.top,
+				'transform': endTransformVal,
+				'left': newOffset.left,
+				'opacity': .75
+			}, duration, function() {
+				$element.show();
+				temp.remove();
+				$element.css('opacity', '1');
+			});
+
+		} else {
+
+			temp.css({
+				'position': 'absolute',
+				'left': oldOffset.left,
+				'top': oldOffset.top,
+				'transform': startTransformVal,
+				'zIndex': 1000
+			});
+			
+			$element.hide();
+
+			temp.animate({
+				'top': newOffset.top,
+				'transform': endTransformVal,
+				'left': newOffset.left
+			}, duration, function() {
+				$element.show();
+				temp.remove();
+			});
+
+		}
+
+    }
+});
+
+function countInArray(array, what) {
+    var count = 0;
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] === what) {
+            count++;
+        }
+    }
+    return count;
+}
 
 function onlyUnique(value, index, self) { 
     return self.indexOf(value) === index;
-}
-
-function searchObj(obj, query) {
-
-    for (var key in obj) {
-        var value = obj[key];
-
-        if (typeof value === 'object') {
-            searchObj(value, query);
-        }
-
-        if (value === query) {
-        }
-
-    }
-
-}
-
-function intersect(a, b) {
-    var t;
-    if (b.length > a.length) t = b, b = a, a = t; // indexOf to loop over shorter
-    return a.filter(function (e) {
-        return b.indexOf(e) > -1;
-    });
 }
 
 function openInNewTab(url) {
 	var win = window.open(url, '_blank');
 	win.focus();
   }
+
+function returnDuplicates(arr, arr2) {
+    var ret = [];
+    for(var i in arr) {   
+        if(arr2.indexOf(arr[i]) > -1){
+            ret.push(arr[i]);
+        }
+    }
+    return ret.toString();
+};
+
+
+function allPossibleCases(arr) {
+	if (arr.length === 0) {
+		return [];
+	} else if (arr.length ===1) {
+		return arr[0];
+	} else {
+		var result = [];
+		var allCasesOfRest = allPossibleCases(arr.slice(1));  // recur with the rest of array
+		for (var c in allCasesOfRest) {
+			for (var i = 0; i < arr[0].length; i++) {
+				result.push(`${arr[0][i]} ${allCasesOfRest[c]}`);
+			}
+		}
+		return result;
+	}
+}
+
+function indexOfMax(arr) {
+    if (arr.length === 0) {
+        return -1;
+    }
+
+    var max = arr[0];
+    var maxIndex = 0;
+
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            maxIndex = i;
+            max = arr[i];
+        }
+    }
+
+    return maxIndex;
+}
